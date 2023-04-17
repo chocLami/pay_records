@@ -176,8 +176,8 @@ def export_to_csv(records: Dict[int, PayRecord], csvfile) -> None:
 def main():
 
     timestamp = strftime("%Y-%m-%d_%H_%M_%S")
-    pay_records = f"pay_records\\employee-payroll-data.csv"
-    output_records = f"pay_records\\employee-payroll-output-{timestamp}.csv"
+    pay_records = f"employee-payroll-data.csv"
+    output_records = f"employee-payroll-output-{timestamp}.csv"
 
     combined_records = {}
 
@@ -191,12 +191,13 @@ def main():
         if employee_id not in combined_records:
             combined_records[employee_id] = create_pay_record(
                 employee_id, hours, rates, visa, year_to_date)
+            print(f"Created new pay record for employee {employee_id}")
 
         else:
             # previously used list method .extend()
             combined_records[employee_id].add_hours(hours)
             combined_records[employee_id].add_rates(rates)  # same as above
-            #print([employee_id], hours, rates)
+            print(f"Updated pay record for employee {employee_id}")
     
     # Export all records to a CSV file
     with open(output_records, 'w', newline='') as csvfile:
