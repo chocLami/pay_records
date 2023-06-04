@@ -176,8 +176,8 @@ def export_to_csv(records: Dict[int, PayRecord], csvfile) -> None:
 def main():
 
     timestamp = strftime("%Y-%m-%d_%H_%M_%S")
-    pay_records = f"employee-payroll-data.csv"
-    output_records = f"employee-payroll-output-{timestamp}.csv"
+    pay_records = fr"F:\Python Assessment Learning - Copy\pay_records\employee-payroll-data.csv"
+    output_records = fr"F:\Python Assessment Learning - Copy\pay_records\employee-payroll-output-{timestamp}.csv"
 
     combined_records = {}
 
@@ -198,16 +198,13 @@ def main():
             combined_records[employee_id].add_hours(hours)
             combined_records[employee_id].add_rates(rates)  # same as above
             print(f"Updated pay record for employee {employee_id}")
-    
-    # Export all records to a CSV file
+
     with open(output_records, 'w', newline='') as csvfile:
         export_to_csv(combined_records, csvfile)
-        
+
     for record in combined_records.values():
         print(record)
 
 
 if __name__ == "__main__":
     main()
-
-
